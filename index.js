@@ -15,25 +15,29 @@
 
 
 
-
-// load modules.
-const getproductticker = require('./node_methods/getproductticker')
-// loaded modules.
-
-
-
-
 (async function main() {
 
-  // make request.
-  let ticker = await getproductticker ( 'https://api.prime.coinbase.com', 'ETH-USD' )
-  // made request.
+  // load modules.
+  const getproductticker = require('./node_methods/getproductticker')
+  // loaded modules.
+
+  // make requests.
+  let ethusd = await getproductticker ( 'https://api.prime.coinbase.com', 'ETH-USD' )
+  let ethdai = await getproductticker ( 'https://api.prime.coinbase.com', 'ETH-DAI' )
+  let daiusd = await getproductticker ( 'https://api.prime.coinbase.com', 'DAI-USDC' )
+  // made requests.
 
   // handle response.
 
     // report.
-    let price = Number ( ticker.price );
-    console.log( ('price: ').padStart(20) + price );
+    let ethusdprice = Number ( ethusd.price );
+    let ethdaiprice = Number ( ethdai.price );
+    let daiusdprice = Number ( daiusd.price );
+    console.log( ('ETH/USD price: ').padStart(20) + ethusdprice );
+    console.log( ('ETH/DAI price: ').padStart(20) + ethdaiprice );
+    console.log( ('DAI/USD price: ').padStart(20) + daiusdprice );
+    console.log( ('============== ').padStart(20) );
+    console.log( ('DAI/USD trade: ').padStart(20) + +ethusdprice / +ethdaiprice );
     // reported.
 
   // handled response.
